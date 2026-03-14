@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+<title></title>
+</head>
+<body>
+<h1>路辅导代码工具</h1><hr>
+    <tr>
+        <td><button onClick="newf()" style="height:10vh;width:7vh;background-color:#fff;font-size:20px;">🆕<br>新建</button></td>
+        <td><button onClick="save()" style="height:10vh;width:7vh;background-color:#fff;font-size:20px;">💾<br>保存</button></td>
+        <td><button onClick="set()" style="height:10vh;width:7vh;background-color:#fff;font-size:20px;">⚙️<br>设置</button></td>
+        <td><button onClick="del()" style="height:10vh;width:7vh;background-color:#fff;font-size:20px;">❌<br>删除</button></td>
+        <td><button onClick="debug()" style="height:10vh;width:7vh;background-color:#fff;font-size:20px;">▶️<br>调试</button></td>
+        <td><button onClick="openFile()" style="height:10vh;width:7vh;background-color:#fff;font-size:20px;">📂<br>打开</button></td>
+    </tr>
+<hr>
+<form>
+    <textarea name="html" id="html" cols="40" rows="30" style="font-size: 14px;"></textarea>
+</form>
+<h2>输出区</h2> <div id="htmloutput"> </div>
+  </div>
+<script>
+function newf(){
+    alert("已加载完成");
+    document.getElementById('html').value = "";
+}
+
+function save(){
+    var name = prompt("项目名称","newfile");
+    var html = document.getElementById('html').value;
+    localStorage.setItem(name, html);
+    alert("保存成功");
+}
+
+function set(){
+    var set = prompt("1.字体大小 2.字体颜色 3.文本框大小");
+    if(set === "1"){
+        var fontsize = prompt("字体大小（数字）");
+        try{
+            var fontsize = parseInt(fontsize);
+            document.getElementById('html').style.fontSize = fontsize + "px";
+        }catch(e){
+            alert("请输入数字");
+        }
+    } else if(set === "2"){
+        var color = prompt("输入颜色:如#aaaaaa");
+        document.getElementById('html').style.color = color;
+    } else if(set === "3"){
+        var height = prompt("行数");
+        var width = prompt("列数");
+        document.getElementById('html').cols = width;
+        document.getElementById('html').rows = height;
+    } else {
+        alert("请输入123");
+    }
+}
+
+function debug(){
+    var file = document.getElementById('html').value;
+    document.getElementById("htmloutput").innerHTML = file;
+}
+
+function openFile(){
+    var id = prompt("输入项目名");
+    try{
+        var h5 = localStorage.getItem(id);
+        document.getElementById("html").value = h5;
+    }catch(e){
+        alert("无此项目");
+    }
+}
+
+function del(){
+    var del = prompt("删除的项目名");
+    try{
+        localStorage.removeItem(del);
+        alert("已删除该项目");
+    }catch(e){
+        alert("无此项目");
+    }
+}
+</script>
+</body>
+</html>

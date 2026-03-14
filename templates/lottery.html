@@ -1,0 +1,75 @@
+<center><h1>路辅导彩票</h1><hr><h3>游戏规则<br>一，用户输入三位数计算机匹配随机数依此判断是否中奖<hr>
+中奖方式<br>
+一等奖:三个数字全部位置<br>二等奖:三个数字数正确位置不正确<br>三等奖:两个数字位置正确<br>四等奖:一个数位置正确<hr>中奖钱数<br>一等奖:100元<br>二等奖:30元<br>三等奖:10元<br>四等奖:5元<hr>彩票价格<br>一元/次<hr><h2>快来试试吧 </h2>
+<input type="text" id="ctu" size=2 style="font-size:100px"/><br>
+<p style="background-color:#28a745;
+display:inline-block;
+color:white;
+border-radius:8px;
+padding:10px 20px;
+font-size:14px;
+" onclick="play()">GO</p><hr>
+我的钱:<h3 id="money"></h3></center>
+<script>
+function play() {
+    var ctu = document.getElementById("ctu");
+    if (!ctu || ctu.value.length !== 3 || isNaN(ctu.value)) {
+        alert("请输入3位数字！");
+        return;
+    }
+    var ctuValue = ctu.value;
+    var ctu1 = ctuValue.charAt(0);
+    var ctu2 = ctuValue.charAt(1);
+    var ctu3 = ctuValue.charAt(2);
+
+    var ctr1 = Math.floor(Math.random() * 10).toString();
+    var ctr2 = Math.floor(Math.random() * 10).toString();
+    var ctr3 = Math.floor(Math.random() * 10).toString();
+    var xp = 0;
+
+    if (ctu1 === ctr1) xp += 1;
+    if (ctu2 === ctr2) xp += 1;
+    if (ctu3 === ctr3) xp += 1;
+
+    var userNums = [ctu1, ctu2, ctu3];
+    var randomNums = [ctr1, ctr2, ctr3];
+    var isAllNumsMatch = userNums.every(num => randomNums.includes(num)) 
+        && randomNums.every(num => userNums.includes(num));
+    if (isAllNumsMatch && xp === 0) {
+        xp = 4;
+    }
+
+    var m = localStorage.getItem("money");
+    m = m ? Number(m) : 10;
+
+    switch (xp) {
+        case 0:
+            alert("好吧！没中奖，号码是" + ctr1 + ctr2 + ctr3);
+            m -= 1;
+            break;
+        case 1:
+            alert("中了四等奖！号码是" + ctr1 + ctr2 + ctr3);
+            m += 4;
+            break;
+        case 2:
+            alert("中了三等奖！号码是" + ctr1 + ctr2 + ctr3);
+            m += 9;
+            break;
+        case 3:
+            alert("中了一等奖！号码是" + ctr1 + ctr2 + ctr3);
+            m += 99;
+            break;
+        case 4:
+            alert("中了二等奖！号码是" + ctr1 + ctr2 + ctr3);
+            m += 19;
+            break;
+    }
+    localStorage.setItem("money", m.toString());
+    document.getElementById("money").innerHTML = m;
+  document.getElementById("ctu").value = "";
+
+}
+
+    var money = localStorage.getItem("money");
+    document.getElementById("money").innerHTML = money;
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body style="height:100vh; margin:0; padding:0; overflow:hidden;">
+    <div style="display:flex; height:40px; align-items:center;">
+        <input type="text" id="html5" style="flex:8; height:100%; border:1px solid #ccc; border-right:none; font-size:16px; box-sizing:border-box; padding:0 12px; outline:none; margin:0;">
+        <button onClick="find()" style="flex:2; background-color:#28a745;
+display:inline-block;border=none;
+color:white;
+border-radius:8px;
+padding:10px 20px;
+font-size:14px;
+height:100%; margin:0;">搜索</button>
+    </div>
+    <hr style="margin:0; border:none; border-top:1px solid #ddd; line-height:0;">
+    <iframe src="https://www.baidu.com" style="height:calc(100vh - 41px); width:100vw; border:none; margin:0; padding:0;" id="url"></iframe>
+
+    <script>
+    function find(){
+        var url = document.getElementById('html5').value;
+        var outputurl = document.getElementById("url");
+        outputurl.src = "https://www.baidu.com/s?wd=" + url;
+        alert("小路已加载到:" + url);
+    }
+    </script>
+</body>
+</html>
